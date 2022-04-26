@@ -7,7 +7,7 @@
 const me = {
 name: 'Adrie',
 age: 31,
-};
+}
 
 
 
@@ -23,7 +23,7 @@ const dog = {
   color: 'Black',
   age: 5,
   goodBoy: true
-};
+}
 
 
 
@@ -37,7 +37,7 @@ console.log(dog.name);
 //////////////////////////// PROBLEM 4 ////////////////////////////
 /* Print out the color of the dog you created in problem 2 using bracket-notation. */
 
-console.log(dog.color);
+console.log(dog['color']);
 
 
 
@@ -53,7 +53,7 @@ const favoriteThings = {
   person: 'My dad',
   book: 'The Alchemist',
   movie: 'The Gladiator',
-  holiday: 'Halloween',
+  holiday: 'Halloween'
 };
 
 
@@ -76,7 +76,6 @@ favoriteThings.show = 'Friends'
 favoriteThings.food = 'Chicken Nuggets'
 favoriteThings.book = 'Harry Potter'
 
-console.log(favoriteThings.food);
 
 //////////////////////////// PROBLEM 6 ////////////////////////////
 
@@ -104,12 +103,6 @@ let {color, make, model, year} = carDetails
   The property names are firstName, lastName, and title.
 */
 
-const obj = {
-  title: 'Mr.',
-  firstName: 'Adrie',
-  lastName: 'Buendia',
- 
-}
 
 function greeting( obj ) {
 let {firstName, lastName, title} = obj
@@ -118,7 +111,6 @@ let {firstName, lastName, title} = obj
   return 'Hello, ' + title + ' ' + firstName + ' ' + lastName + '!';
   // Do not edit the code above. 
 }
-console.log(greeting(obj));
 
 
 //////////////////////////// PROBLEM 8 ////////////////////////////
@@ -156,7 +148,7 @@ console.log(totalPopulation(object));
 
 function ingredients(objects){
 let {carb, fat, protein} = objects
-return ['carb', 'fat',  'protein'];
+return ['carb', 'fat', 'protein'];
 }
 const objects = {
   carb: 'carb',
@@ -280,8 +272,9 @@ class Phone {
   }
   changePrice(newPrice) {
     this.price = newPrice
+    return newPrice
   }
-}
+} 
 
 /*
     Next make three new phone instances using your class.
@@ -293,11 +286,11 @@ class Phone {
     - price: number
 */
 
-let phone1 = new Phone('Nokia', '6120', 120, 'blue', 320)
+let phoneOne = new Phone('Nokia', '6120', 120, 'blue', 320)
 
-let phone2 = new Phone('Motorola', 'Razr', 120, 'Silver', 400)
+let phoneTwo = new Phone('Motorola', 'Razr', 120, 'Silver', 400)
 
-let phone3 = new Phone('Sony', 'Ericcson', 240, 'Black', 350)
+let phoneThree = new Phone('Sony', 'Ericcson', 240, 'Black', 350)
 
 /* 
   Call the changePrice function on one of your phones, 
@@ -305,23 +298,24 @@ let phone3 = new Phone('Sony', 'Ericcson', 240, 'Black', 350)
 
   Then console.log that object to see the price change
 */ 
-phone1.changePrice
-
+phoneOne.changePrice(400); 
+console.log(phoneOne);
 /*
   Now call the sell method on one of your other phone objects
 
   Print the value of that phone's sell property to make sure it's been changed to true
 */
 
-//Code Here 
-
+phoneTwo.sell()
+console.log(phoneTwo.sold);
 
 //////////////////////////// PROBLEM 15 ////////////////////////////
 
 /*
   Use the spread operator to create a copy of the colors object below.
   Store the copy in a variable called colorsCopy.
-  Note: We did not cover the spread operator in class. We do not expect you to know how to use it. Challenge yourself by going online and researching what the spread operator is and how to use it.
+  Note: We did not cover the spread operator in class. We do not expect you to know how to use it.
+   Challenge yourself by going online and researching what the spread operator is and how to use it.
 */
 
 //do not edit this object
@@ -331,8 +325,10 @@ const colors = {
   text: 'yellow'
 }
 //do not edit this object
-
-//Code Here 
+const colorsCopy = {
+  ...colors,
+}
+console.log(colorsCopy);
 
 
 
@@ -360,11 +356,14 @@ const shippingInfo = {
 }
 //do not edit the objects above
 
-//Code Here
+const helensInfo = {
+  ...contactInfo,
+  ...shippingInfo
+}
 
 
 //Print helensInfo to see what it looks like, there should be no repeating properties.
-
+console.log(helensInfo);
 
 //////////////////////////// PROBLEM 16 ////////////////////////////
 
@@ -378,14 +377,25 @@ const shippingInfo = {
   And finally, print the value of the mileage.
 */
 
-//Code Here 
+class Vehicle {
+  constructor(capacity, color, mileage){
+    this.capacity = capacity
+    this.color = color
+    this.mileage = mileage
+  }
+
+  move(miles){
+    this.mileage += miles
+    console.log(this.mileage);
+  }
+}
 
 
 /*
   Create a vehicle using your new class and save it to a variable called myFirstVehicle
 */
 
-//Code Here
+const myFirstVehicle  = new Vehicle (2, "red", 10000)
 
 
 /* 
@@ -396,17 +406,26 @@ const shippingInfo = {
   new ones: make and isCool. (Hint: don't forget to call the super function)
 */
 
-//Code Here
+class Motorcycle extends Vehicle {
+  constructor(capacity, color, mileage, make, isCool){
+    super(capacity, color, mileage)
+    this.make = make,
+    this.isCool = isCool
+  }
+
+}
 
 /*
   Create a Motorcycle using your new class and save it to a variable called myFirstMotorcycle
 */
 
-//Code Here 
+const myFirstMotorcycle = new Motorcycle(1, 'black', 23000, 'Ducati', true)
 
 /*
   Call the move function on myFirstMotorcycle (don't forget the parameter)
 */
+
+myFirstMotorcycle.move(100)
 
 /*
   Let's make another class based off of Vehicle. 
@@ -424,7 +443,24 @@ const shippingInfo = {
   This function should set isSeaworthy to be true
 */
 
-//Code Here
+class Boat extends Vehicle {
+  constructor(capacity, color, mileage, name, type, isSeaworthy){
+    super(capacity, color, mileage)
+    this.name = name,
+    this.type = type,
+    this.isSeaworthy = isSeaworthy
+  }
+ checkSeaWorthiness() {
+   if(this.isSeaworthy) {
+    console.log(`The ${this.color} ${this.type} ${this.name} is seaworthy!`)
+   } else {
+     console.log(`You need to get your ${this.type} in shape!`)
+   } 
+  }
+ performMaintenance(){
+   this.isSeaworthy = true
+  }
+}
 
 
 /*
@@ -432,22 +468,22 @@ const shippingInfo = {
   properties except isSeaworthy -- make that one false. Call your variable myFirstBoat.
 */
 
-//Code Here
+const myFirstBoat = new Boat (8, 'Black', 4500, 'Black Pearl', 'Yacht', false)
 
 /*
   Call the checkSeaworthiness method on your new boat
 */
 
-//Code Here
+myFirstBoat.checkSeaWorthiness()
 
 /*
   Now run the performMaintenance method on your boat
 */
 
-//Code Here 
+myFirstBoat.performMaintenance()
 
 /*
   Check the seaworthiness once more (you should be ready for the water!)
 */
 
-//Code Here
+myFirstBoat.checkSeaWorthiness()
